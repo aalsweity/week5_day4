@@ -25,19 +25,19 @@ FROM film
 WHERE title = 'The Gooonies';
 
 CREATE OR REPLACE FUNCTION get_category_count(num int2)
-RETURN integer
-LANGUAGE plpgsql
+RETURNS integer
+LANGUAGE plpgsql --main syntax error
 AS $$
 	DECLARE cat_num integer;
 BEGIN 
-	SELECT category_id, count(*)
+	SELECT count(*) INTO cat_num -- error was tring TO pass 2 SELECT statements INTO cat_num.
 	FROM film_category
 	WHERE category_id = num;
 	RETURN cat_num;
 END;
-$$;
-END
+$$; --code is now resolved of issues.                     
 
+select get_category_count(CAST(16 AS int2));
 
 	 
 	
